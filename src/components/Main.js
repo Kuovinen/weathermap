@@ -7,7 +7,7 @@ export default function Header() {
   //get weather data from API;
   function getWeatherData() {
     fetch(
-      "https://www.7timer.info/bin/civil.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0"
+      "https://www.7timer.info/bin/civil.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json"
     )
       .then((res) => res.json())
       .then((data) => structureData(data))
@@ -49,17 +49,61 @@ export default function Header() {
     setStructuredData(structuredData);
   }
 
+  function createIcon(description) {
+    let address;
+    switch (description) {
+      case "clearday":
+      case "clearnight":
+        address = "/modernUi/sun.svg";
+        break;
+      case "pcloudyday":
+      case "pcloudynight":
+        address = "/modernUi/overcast.svg";
+        break;
+      case "snowday":
+      case "snownight":
+        address = "/modernUi/snow.svg";
+        break;
+      case "mcloudyday":
+      case "mcloudynight":
+      case "cloudyday":
+      case "cloudynight":
+      case "oshowerday":
+      case "oshowernight":
+      case "ishowerday":
+      case "ishowernight":
+        address = "/modernUi/cloud.svg";
+        break;
+      case "lightrainnight":
+      case "lightrainday":
+        address = "/modernUi/rain2.svg";
+        break;
+      default:
+        address = "/modernUi/snowflake.svg";
+    }
+    return address;
+  }
   //Create components from structured weather data
   function createWeather() {
     setWeather(
       structuredData.map((element, index) => {
         return (
-          <div key={index + "card"} className="fs-5 text">
-            {element.date}::::
+          <div key={index + "card"} className="fs-6 col-auto text-center">
+            <div className="fw-bold bg-info">{element.date}</div>
             {element.forecast.map((element, index) => (
-              <span key={index + "temp"} className="fs-6 text">
-                ||| {element.timepoint}-{element.temp2m}°C
-              </span>
+              <div key={index + "temp"} className="fs-6 col border">
+                <div className="row justify-content-center">
+                  {element.timepoint}
+                </div>{" "}
+                <img
+                  className="w-50 "
+                  src={createIcon(element.weather)}
+                  alt="icon"
+                />
+                <div className="row justify-content-center">
+                  {element.temp2m}°C
+                </div>
+              </div>
             ))}
           </div>
         );
@@ -68,9 +112,17 @@ export default function Header() {
   }
 
   return (
-    <main className="container bg-light" onClick={getWeatherData}>
-      <button onClick={createWeather}>WEATHER</button>
-      <div className="table">{weather}</div>
+    <main className="container flex-column bg-light justify-content-center">
+      <div className="row justify-content-center">
+        <button className="border-0 col-auto" onClick={getWeatherData}>
+          DATA
+        </button>
+        <button className="border-0 col-auto" onClick={createWeather}>
+          WEATHER
+        </button>
+      </div>
+
+      <div className="row justify-content-center">{weather}</div>
     </main>
   );
 }
