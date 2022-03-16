@@ -75,6 +75,8 @@ export default function Header() {
         address = "/modernUi/cloud.svg";
         break;
       case "lightrainnight":
+      case "rainday":
+      case "rainnight":
       case "lightrainday":
         address = "/modernUi/rain2.svg";
         break;
