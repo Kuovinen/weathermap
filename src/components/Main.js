@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import createIcon, { correctArrayTimeslots } from "./functions.js";
 export default function Header() {
   const [structuredData, setStructuredData] = useState([]);
   const [weather, setWeather] = useState([]);
@@ -34,11 +35,14 @@ export default function Header() {
     let year = data.init.slice(0, 4);
     let month = data.init.slice(4, 6);
     let day = data.init.slice(6, 8);
-    //split array from weather data into 8 chunks (days)
-    let forecasts = arrayOfArrays(data.dataseries, 8);
+    let time = data.init.slice(8);
+    //split array from weather data into 9 chunks (days)
+    let forecasts = correctArrayTimeslots(data.dataseries, Number(time));
+
+    forecasts = arrayOfArrays(forecasts, 9);
     //for eacht day, create an object in structuredData,
     //containint date and forecast
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
       //modify to account for month end-*-----------------------------------------------FUNCTION NEEDED----
       day = Number(day) + 1;
       structuredData.push({
@@ -46,45 +50,10 @@ export default function Header() {
         forecast: forecasts[i],
       });
     }
+    console.log(structuredData);
     setStructuredData(structuredData);
   }
 
-  function createIcon(description) {
-    let address;
-    switch (description) {
-      case "clearday":
-      case "clearnight":
-        address = "/modernUi/sun.svg";
-        break;
-      case "pcloudyday":
-      case "pcloudynight":
-        address = "/modernUi/overcast.svg";
-        break;
-      case "snowday":
-      case "snownight":
-        address = "/modernUi/snow.svg";
-        break;
-      case "mcloudyday":
-      case "mcloudynight":
-      case "cloudyday":
-      case "cloudynight":
-      case "oshowerday":
-      case "oshowernight":
-      case "ishowerday":
-      case "ishowernight":
-        address = "/modernUi/cloud.svg";
-        break;
-      case "lightrainnight":
-      case "rainday":
-      case "rainnight":
-      case "lightrainday":
-        address = "/modernUi/rain2.svg";
-        break;
-      default:
-        address = "/modernUi/snowflake.svg";
-    }
-    return address;
-  }
   //Create components from structured weather data
   function createWeather() {
     setWeather(
