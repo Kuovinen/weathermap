@@ -105,30 +105,105 @@ export default function createIcon(description) {
       break;
     case "pcloudyday":
     case "pcloudynight":
+    case "mcloudyday":
+    case "mcloudynight":
       address = "/modernUi/overcast.svg";
       break;
     case "snowday":
     case "snownight":
       address = "/modernUi/snow.svg";
       break;
-    case "mcloudyday":
-    case "mcloudynight":
+
     case "cloudyday":
     case "cloudynight":
     case "oshowerday":
     case "oshowernight":
-    case "ishowerday":
-    case "ishowernight":
       address = "/modernUi/cloud.svg";
       break;
     case "lightrainnight":
     case "rainday":
     case "rainnight":
     case "lightrainday":
+    case "ishowerday":
+    case "ishowernight":
       address = "/modernUi/rain2.svg";
       break;
     default:
       address = "/modernUi/snowflake.svg";
   }
   return address;
+}
+//returns new padded array with added empty field according to initial timeslot
+export function padArray(array, time) {
+  //initial time:
+  let timeSlot = assignInitTimeSlot(time);
+  console.log(`got timeslot ${timeSlot}`);
+  let test = [2, 5, 8, 11, 14, 17, 20, 23];
+  let numberOfEmpties = test.indexOf(timeSlot);
+  let empties = [];
+  let emptyObject = {
+    timepoint: null,
+    cloudcover: null,
+    lifted_index: null,
+    prec_type: null,
+    prec_amount: null,
+    temp2m: null,
+    rh2m: null,
+    wind10m: null,
+    weather: null,
+  };
+  for (let i = 0; i < numberOfEmpties; i++) {
+    empties = [...empties, emptyObject];
+  }
+  return [...empties, ...array];
+}
+//convert 12 hour system to 24 -need to fix according to geolocation,
+//timeAtLocation is a placeholder for that
+export function convertTime(valueGotten, timeAtLocation) {
+  let time = new Date();
+  let newValue;
+
+  if (time < 13) {
+    newValue = valueGotten;
+  } else {
+    switch (valueGotten) {
+      case 1:
+        newValue = 13;
+        break;
+      case 2:
+        newValue = 14;
+        break;
+      case 3:
+        newValue = 15;
+        break;
+      case 4:
+        newValue = 16;
+        break;
+      case 5:
+        newValue = 17;
+        break;
+      case 6:
+        newValue = 18;
+        break;
+      case 7:
+        newValue = 19;
+        break;
+      case 8:
+        newValue = 20;
+        break;
+      case 9:
+        newValue = 21;
+        break;
+      case 10:
+        newValue = 22;
+        break;
+      case 11:
+        newValue = 23;
+        break;
+      case 12:
+        newValue = 24;
+        break;
+    }
+  }
+  return newValue;
 }
