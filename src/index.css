@@ -2,11 +2,3 @@ body {
   margin: 0;
   font-family: arial;
 }
-
-header {
-  color: white;
-}
-img {
-  filter: invert(73%) sepia(93%) saturate(2495%) hue-rotate(146deg)
-    brightness(95%) contrast(98%);
-}
