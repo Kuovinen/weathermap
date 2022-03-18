@@ -129,7 +129,7 @@ export default function createIcon(description) {
       address = "/modernUi/rain2.svg";
       break;
     default:
-      address = "/modernUi/snowflake.svg";
+      address = "/modernUi/empty.svg";
   }
   return address;
 }
