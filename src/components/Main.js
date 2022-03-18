@@ -73,12 +73,15 @@ export default function Header() {
               let tab;
 
               let tab1 = (
-                <div key={index + "temp"} className="fs-6 col border">
+                <div
+                  key={index + "temp"}
+                  className="fs-6 col border user-select-none"
+                >
                   <div className="row justify-content-center">
                     {element.timepoint}:00
                   </div>{" "}
                   <img
-                    className="w-50 "
+                    className="w-50 weatherIcon"
                     src={createIcon(element.weather)}
                     alt="icon"
                   />
@@ -88,10 +91,17 @@ export default function Header() {
                 </div>
               );
               let tab2 = (
-                <div key={index + "temp"} className="fs-6 col border">
-                  <div className="row justify-content-center">-</div>{" "}
-                  <div className="row justify-content-center">-</div>
-                  <div className="row justify-content-center">-</div>
+                <div
+                  key={index + "temp"}
+                  className="fs-6 col border user-select-none bg-info opacity-25"
+                >
+                  <div className="row justify-content-center text-info">.</div>{" "}
+                  <img
+                    className="w-50 "
+                    src={createIcon(element.weather)}
+                    alt="icon"
+                  />
+                  <div className="row justify-content-center text-info">.</div>
                 </div>
               );
               tab = element.cloudcover == null ? tab2 : tab1;
@@ -104,17 +114,32 @@ export default function Header() {
   }
 
   return (
-    <main className="container flex-column bg-light justify-content-center">
-      <div className="row justify-content-center">
+    <main className="container-fluid flex-column bg-light justify-content-center">
+      <section className="row justify-content-center">
         <button className="border-0 col-auto" onClick={getWeatherData}>
           DATA
         </button>
         <button className="border-0 col-auto" onClick={createWeather}>
           WEATHER
         </button>
-      </div>
+      </section>
+      <section className="row">
+        <div className="col-6">
+          <div className="row justify-content-center">{weather}</div>
+        </div>
+        <div className="col-6">
+          <div className="row">
+            <form className="row justify-content-center bg-info m-0">
+              <input placeholder="Input location:" className="" />
+            </form>
+            <div className="row justify-content-center bg-info m-0">
+              WEATHER NOW
+            </div>
+          </div>
 
-      <div className="row justify-content-center">{weather}</div>
+          <div className="row justify-content-center m-0">map</div>
+        </div>
+      </section>
     </main>
   );
 }
