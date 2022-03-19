@@ -208,3 +208,12 @@ export function convertTime(valueGotten, timeAtLocation) {
   }
   return newValue;
 }
+//returns copy of original array split into chunk sized arrays
+export function arrayOfArrays(array, chunk) {
+  let i;
+  let temporary = [];
+  for (i = 0; i < array.length; i += chunk) {
+    temporary.push(array.slice(i, i + chunk));
+  }
+  return temporary;
+}
