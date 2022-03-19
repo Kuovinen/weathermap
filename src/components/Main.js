@@ -40,6 +40,10 @@ export default function Header() {
     let month = data.init.slice(4, 6);
     let day = data.init.slice(6, 8);
     let time = data.init.slice(8);
+    if (time == "00") {
+      console.log("got!");
+      time = "0";
+    }
     time = convertTime(Number(time));
     //assign proper timeslots
     let forecasts = correctArrayTimeslots(data.dataseries, Number(time));

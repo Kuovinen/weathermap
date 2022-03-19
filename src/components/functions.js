@@ -40,6 +40,7 @@ export function assignInitTimeSlot(initial) {
     case 23:
     case 24:
     case 0:
+    case "00":
     case 1:
       result = 23;
       break;
@@ -200,7 +201,7 @@ export function convertTime(valueGotten, timeAtLocation) {
       case 11:
         newValue = 23;
         break;
-      case 12:
+      case 0:
         newValue = 24;
         break;
     }
