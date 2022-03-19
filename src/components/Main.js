@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-
 import createIcon, {
   correctArrayTimeslots,
   padArray,
   convertTime,
+  arrayOfArrays,
 } from "./functions.js";
+import Map from "./Map.js";
 export default function Header() {
   const [structuredData, setStructuredData] = useState([]);
   const [weather, setWeather] = useState([]);
@@ -20,15 +21,6 @@ export default function Header() {
         console.log(`Got error while trying to access weather data.`);
         console.log(err);
       });
-  }
-  //returns copy of original array split into chunk sized arrays
-  function arrayOfArrays(array, chunk) {
-    let i;
-    let temporary = [];
-    for (i = 0; i < array.length; i += chunk) {
-      temporary.push(array.slice(i, i + chunk));
-    }
-    return temporary;
   }
 
   //takes api data and returns an array of objects containing
@@ -133,15 +125,10 @@ export default function Header() {
         </div>
         <div className="col-6">
           <div className="row">
-            <form className="row justify-content-center bg-info m-0">
-              <input placeholder="Input location:" className="" />
-            </form>
             <div className="row justify-content-center bg-info m-0">
-              WEATHER NOW
+              <Map />
             </div>
           </div>
-
-          <div className="row justify-content-center m-0">map</div>
         </div>
       </section>
     </main>
@@ -149,7 +136,5 @@ export default function Header() {
 }
 //TO DO
 /*
-stop even propogation
-visual formating
-function to correctly decide days and forecast data allocation
+Link map to forecast data
 */
