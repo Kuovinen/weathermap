@@ -9,11 +9,14 @@ import Map from "./Map.js";
 export default function Header() {
   const [structuredData, setStructuredData] = useState([]);
   const [weather, setWeather] = useState([]);
+  const [coordinates, setCoordinates] = useState({ lat: 60.169, lng: 24.938 });
 
   //get weather data from API;
   function getWeatherData() {
+    let lat = coordinates.lat;
+    let lng = coordinates.lng;
     fetch(
-      "https://www.7timer.info/bin/civil.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json"
+      `https://www.7timer.info/bin/civil.php?lon=${lng}&lat=${lat}&ac=0&unit=metric&output=json`
     )
       .then((res) => res.json())
       .then((data) => structureData(data))
@@ -108,17 +111,18 @@ export default function Header() {
       })
     );
   }
-
+  useEffect(() => {
+    getWeatherData();
+  }, [coordinates]);
+  useEffect(() => {
+    getWeatherData();
+  }, []);
+  useEffect(() => {
+    createWeather();
+  }, [structuredData]);
   return (
     <main className="container-fluid flex-column bg-light justify-content-center">
-      <section className="row justify-content-center">
-        <button className="border-0 col-auto" onClick={getWeatherData}>
-          DATA
-        </button>
-        <button className="border-0 col-auto" onClick={createWeather}>
-          WEATHER
-        </button>
-      </section>
+      <section className="row justify-content-center"></section>
       <section className="row">
         <div className="col-6">
           <div className="row justify-content-center">{weather}</div>
@@ -126,7 +130,7 @@ export default function Header() {
         <div className="col-6">
           <div className="row">
             <div className="row justify-content-center bg-info m-0">
-              <Map />
+              <Map coordinates={coordinates} setCoordinates={setCoordinates} />
             </div>
           </div>
         </div>
