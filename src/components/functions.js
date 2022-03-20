@@ -112,6 +112,9 @@ export default function createIcon(description) {
     case "mcloudynight":
       address = "/modernUi/overcast.svg";
       break;
+
+    case "lightsnowday":
+    case "lightsnownight":
     case "snowday":
     case "snownight":
       address = "/modernUi/snow.svg";
