@@ -100,6 +100,8 @@ export function correctArrayTimeslots(array, time) {
 export default function createIcon(description) {
   let address;
   switch (description) {
+    case "humidday":
+    case "humidnight":
     case "clearday":
     case "clearnight":
       address = "/modernUi/sun.svg";
