@@ -5,10 +5,12 @@ const mapContainerStyle = {
   width: "100vw",
   height: "50vh",
   marginBottom: "1rem",
+  border: "0.1rem solid white",
 };
 const options = { styles: mapStyles, disableDefaultUI: true };
 
 export default function Map(props) {
+  console.log("Rendered MAP");
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
@@ -17,11 +19,11 @@ export default function Map(props) {
 
   return (
     <div className="row position-relative">
-      <form className="row justify-content-center bg-info m-0 p-0">
-        <input placeholder="Input location:" className="" />
-      </form>
       <div className="row justify-content-center fw-bold bg-light m-0 position-relative bg-warning link-info p-1 ">
-        WEATHER NOW AT: {props.coordinates.lat}/{props.coordinates.lng}
+        WEATHER NOW AT | LAT:{props.coordinates.lat} LONG:
+        {props.coordinates.lng}
+        {" | "}
+        {props.location.country}-{props.location.adminArea}
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
