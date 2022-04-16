@@ -52,7 +52,7 @@ export default function Header() {
     for (let i = 0; i < 7; i++) {
       //modify to account for month end-*-----------------------------------------------FUNCTION NEEDED----
       structuredData.push({
-        date: `${day}.${month}.${year}`,
+        date: `${day}.${month}`, //.${year}`,
         forecast: forecasts[i],
       });
       day = Number(day) + 1;
@@ -66,41 +66,53 @@ export default function Header() {
     setWeather(
       structuredData.map((element, index) => {
         return (
-          <div key={index + "card"} className="fs-6 col-auto text-center">
-            <div className="fw-bold bg-info">{element.date}</div>
+          //WEATHER COLUMN
+          <div key={index + "card"} className="fs-6 col text-center m-3 p-0">
+            {/*DATE cell*/}
+            <div className="row justify-content-center fw-bold bg-info small">
+              {element.date}
+            </div>
             {element.forecast.map((element, index) => {
               let tab;
 
               let tab1 = (
+                //WEATHER DATA CELL
                 <div
                   key={index + "temp"}
-                  className="fs-6 col border user-select-none"
+                  className="fs-6 row border user-select-none"
                 >
-                  <div className="row justify-content-center">
-                    {element.timepoint}:00
-                  </div>{" "}
+                  <div className="col-6">
+                    {/*TIME*/}
+                    <div className="row small">{element.timepoint}:00</div>{" "}
+                    {/*TEMPERATURE*/}
+                    <div className="row small">{element.temp2m}°C</div>
+                  </div>
+                  {/*ICON*/}
                   <img
-                    className="w-50 weatherIcon"
+                    className="col-4 weatherIcon p-0"
                     src={createIcon(element.weather)}
                     alt="icon"
                   />
-                  <div className="row justify-content-center">
-                    {element.temp2m}°C
-                  </div>
                 </div>
               );
               let tab2 = (
+                //WEATHER DATA CELL IF TIME HAS ALREADY PASSED
                 <div
                   key={index + "temp"}
-                  className="fs-6 col border user-select-none bg-info opacity-25"
+                  className="fs-6 row border user-select-none bg-info opacity-25"
                 >
-                  <div className="row justify-content-center text-info">.</div>{" "}
+                  <div className="col-6">
+                    {/*EMPTY TIME*/}
+                    <div className="row small">.</div> {/*EMPTY TEMPERATURE*/}
+                    <div className="row small">.</div>
+                  </div>
+
+                  {/*EMPTY ICON*/}
                   <img
-                    className="w-50 "
+                    className="col-4 weatherIcon p-0 "
                     src={createIcon(element.weather)}
                     alt="icon"
                   />
-                  <div className="row justify-content-center text-info">.</div>
                 </div>
               );
               tab = element.cloudcover == null ? tab2 : tab1;
@@ -121,18 +133,19 @@ export default function Header() {
     createWeather();
   }, [structuredData]);
   return (
-    <main className="container-fluid flex-column bg-light justify-content-center">
-      <section className="row justify-content-center"></section>
-      <section className="row">
-        <div className="col-6">
-          <div className="row justify-content-center">{weather}</div>
-        </div>
-        <div className="col-6">
-          <div className="row">
-            <div className="row justify-content-center bg-info m-0">
+    <main className="container-fluid flex-column bg-light justify-content-center p-0 m-0">
+      <section className="row g-0">
+        {/*The top half of the main, the map*/}
+        <div className="row-auto mt-3 ">
+          <div className="row g-0">
+            <div className="row justify-content-center bg-info m-0 p-2">
               <Map coordinates={coordinates} setCoordinates={setCoordinates} />
             </div>
           </div>
+        </div>
+        {/*The bottom half of the main, the weather*/}
+        <div className="row-auto p-4">
+          <div className="row justify-content-center r-6">{weather}</div>
         </div>
       </section>
     </main>

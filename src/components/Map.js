@@ -1,7 +1,11 @@
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import mapStyles from "./mapStyles.js";
 
-const mapContainerStyle = { width: "48vw", height: "75vh" };
+const mapContainerStyle = {
+  width: "100vw",
+  height: "50vh",
+  marginBottom: "1rem",
+};
 const options = { styles: mapStyles, disableDefaultUI: true };
 
 export default function Map(props) {
@@ -12,8 +16,8 @@ export default function Map(props) {
   if (!isLoaded) return "Error loading";
 
   return (
-    <div className="position-relative">
-      <form className="row justify-content-center bg-info m-0">
+    <div className="row position-relative">
+      <form className="row justify-content-center bg-info m-0 p-0">
         <input placeholder="Input location:" className="" />
       </form>
       <div className="row justify-content-center fw-bold bg-light m-0 position-relative bg-warning link-info p-1 ">
