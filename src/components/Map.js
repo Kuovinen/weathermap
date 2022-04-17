@@ -5,7 +5,7 @@ const mapContainerStyle = {
   width: "100vw",
   height: "50vh",
   marginBottom: "1rem",
-  border: "0.1rem solid white",
+  // border: "0.1rem solid white",
 };
 const options = { styles: mapStyles, disableDefaultUI: true };
 
@@ -19,12 +19,6 @@ export default function Map(props) {
 
   return (
     <div className="row position-relative">
-      <div className="row justify-content-center fw-bold bg-light m-0 position-relative bg-warning link-info p-1 ">
-        WEATHER NOW AT | LAT:{props.coordinates.lat} LONG:
-        {props.coordinates.lng}
-        {" | "}
-        {props.location.country}-{props.location.adminArea}
-      </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={11}

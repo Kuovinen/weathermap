@@ -59,15 +59,17 @@ export default function Main() {
         <div className="row-auto mt-1 ">
           <div className="row g-0">
             <div className="row justify-content-center bg-info m-0 pt-3">
-              <Map
-                coordinates={coordinates}
-                setCoordinates={setCoordinates}
-                location={data.location}
-              />
+              <Map coordinates={coordinates} setCoordinates={setCoordinates} />
             </div>
           </div>
         </div>
         {/*The bottom half of the main, the weather*/}
+        <div className="row justify-content-center fw-bold bg-light m-0 position-relative bg-warning link-info p-1 ">
+          WEATHER NOW AT | LAT:{coordinates.lat} LONG:
+          {coordinates.lng}
+          {" | "}
+          {data.location.country}-{data.location.adminArea}
+        </div>
         <div className="row-auto p-4">
           <div className="row justify-content-center r-6">{data.weather}</div>
         </div>
