@@ -236,8 +236,6 @@ export async function getAdminLocation(lat, lng) {
   let user = process.env.REACT_APP_GEONAMES;
   //web services
   //https://www.geonames.org/export/web-services.html
-  //country and area
-  //http://api.geonames.org/countrySubdivision?lat=60.16&lng=24.9&radius=40&username=
   const response = await fetch(
     `http://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lng}&username=${user}`
   );
@@ -299,7 +297,9 @@ export function createWeather(structuredData) {
             >
               <div className="col-6">
                 {/*TIME*/}
-                <div className="row small">{element.timepoint}:00</div>{" "}
+                <div className="row small fw-bold text-info">
+                  {element.timepoint}:00
+                </div>{" "}
                 {/*TEMPERATURE*/}
                 <div className="row small">{element.temp2m}°C</div>
               </div>
@@ -352,9 +352,6 @@ export function structureData(data) {
   if (time === "00") {
     time = "0";
   }
-  /*----------------------------------------------------------------------------------------------------------------------FIX THIS HARDCODE*/
-  time = "1";
-  /*----------------------------------------------------------------------------------------------------------------------FIX THIS HARDCODE*/
   time = convertTime(Number(time));
   //assign proper timeslots
   let forecasts = correctArrayTimeslots(data.dataseries, Number(time));
