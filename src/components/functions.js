@@ -123,7 +123,7 @@ export default function createIcon(description) {
     case "snownight":
       address = "/modernUi/snow.svg";
       break;
-
+    case "tsday":
     case "cloudyday":
     case "cloudynight":
     case "oshowerday":
@@ -139,6 +139,7 @@ export default function createIcon(description) {
       address = "/modernUi/rain2.svg";
       break;
     default:
+      console.log("GOT WEATHER:  " + description);
       address = "/modernUi/empty.svg";
   }
   return address;
