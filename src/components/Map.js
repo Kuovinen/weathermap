@@ -10,7 +10,6 @@ const mapContainerStyle = {
 const options = { styles: mapStyles, disableDefaultUI: true };
 
 export default function Map(props) {
-  console.log("Rendered MAP");
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });

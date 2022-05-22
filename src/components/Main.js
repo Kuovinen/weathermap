@@ -8,7 +8,6 @@ import {
 } from "./functions.js";
 import Map from "./Map.js";
 export default function Main() {
-  console.log("Rendered MAIN");
   const [data, setData] = useState({
     location: { country: "Finland", adminArea: "Uusimaa" },
     timeZoneOffset: 0,
@@ -30,7 +29,11 @@ export default function Main() {
       );
       //returns number
 
-      structuredData = await getWeatherData(coordinates.lat, coordinates.lng);
+      structuredData = await getWeatherData(
+        coordinates.lat,
+        coordinates.lng,
+        timeZoneOffset
+      );
     } catch (err) {
       console.log("Error in updatePage():" + err);
     }
@@ -53,8 +56,11 @@ export default function Main() {
   }, [coordinates]);
 
   return (
-    <main className="container-fluid flex-column bg-light justify-content-center p-0 m-0">
-      <section className="row g-0">
+    <main className="container-fluid  bg-light  align-items-center justify-content-center p-0 m-0">
+      <section
+        className="row g-0 m-auto"
+        style={{ maxWidth: "1200px", minWidth: "375px" }}
+      >
         {/*The top half of the main, the map*/}
         <div className="row-auto mt-1 ">
           <div className="row g-0">
