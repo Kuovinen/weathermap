@@ -217,7 +217,7 @@ export async function getAdminLocation(lat, lng) {
   //web services
   //https://www.geonames.org/export/web-services.html
   const response = await fetch(
-    `http://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lng}&username=${user}`
+    `https://secure.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lng}&username=${user}`
   );
   const data = await response.json();
   const location = {
@@ -250,7 +250,7 @@ export async function getTimeZoneOffset(lat, lng) {
   lng = lng.toString().slice(0, 3);
   const user = process.env.REACT_APP_GEONAMES;
   const response = await fetch(
-    `http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lng}&username=${user}`
+    `https://secure.geonames.org/timezoneJSON?lat=${lat}&lng=${lng}&username=${user}`
   );
   const data = await response.json();
 
