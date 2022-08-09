@@ -1,4 +1,25 @@
-## Weathermap site.
+## ∙Weather report∙
 
-Weather forecast using 7timer weather API and GoogleMaps API.
-Styling done with Bootstrap.
+Written in **JavaScript** using **React** and **Bootstrap**.
+Utilising:
+GoogleMaps API, 7Timer weather API, Geonames API
+
+#### Live links:
+
+https://rzweathermap.netlify.app/
+
+#### To run the front end locally :<br  />
+
+```
+npm install
+npm start
+```
+
+inside the root directory. Requires NodeJs 14 or higher.
+
+#### About:
+
+Simple bootstrapped webpage that uses googlemaps api to produce a map<br  />
+that reads clicks as input coordinates and displays weather info for<br  />
+clicked location through the 7Timer weather API as well as nearest <br  />
+administrative unit (city,village,town) through the geonames Api.
