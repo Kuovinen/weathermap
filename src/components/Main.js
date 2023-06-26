@@ -21,7 +21,6 @@ export default function Main() {
       timeZoneOffset: null,
       structuredData: null,
     };
-
     try {
       information.location = await getAdminLocation(
         coordinates.lat,
@@ -34,7 +33,6 @@ export default function Main() {
         coordinates.lng
       );
       //returns number
-
       information.structuredData = await getWeatherData(
         coordinates.lat,
         coordinates.lng,
@@ -69,7 +67,7 @@ export default function Main() {
         style={{ maxWidth: "1200px", minWidth: "375px" }}
       >
         {/*The top half of the main, the map*/}
-        <div className="row-auto mt-1" title="weatherContainer">
+        <div className="row-auto mt-1" title="mapContainer">
           <div className="row g-0">
             <div className="row justify-content-center bg-info m-0 pt-3">
               <Map coordinates={coordinates} setCoordinates={setCoordinates} />
