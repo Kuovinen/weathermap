@@ -16,6 +16,8 @@ npm start
 ```
 
 inside the root directory. Requires NodeJs 14 or higher.
+Note that the local version of the app won't display the map, as the API key is
+restricted to hte linked site url only.
 
 #### About:
 
