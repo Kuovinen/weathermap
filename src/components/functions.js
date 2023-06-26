@@ -81,7 +81,7 @@ export function assignNextTimeslot(initial) {
 //takes an array of objects containing TIMPOINT keys and replaces their values;
 //first value = time, the rest derrived from it based on "assignTimeslot()"
 export function correctArrayTimeslots(array, time) {
-  let arr = array.reduce((previous, current, index) => {
+  const arr = array.reduce((previous, current, index) => {
     //replace first elements timepoint value with json init time value
     if (index === 0) {
       current.timepoint = time;
@@ -143,7 +143,6 @@ export default function createIcon(description) {
 //returns new padded array with added empty field according to initial timeslot
 export function padArray(array, time) {
   //initial time:
-  let timeSlot = time;
 
   const test = [];
   const timeslotstep = 3; //api creates slots each 3 hours
@@ -258,7 +257,7 @@ export async function getTimeZoneOffset(lat, lng) {
 }
 //Create components from structured weather data
 export function createWeather(structuredData) {
-  let weatherArray = structuredData.map((element, index) => {
+  const weatherArray = structuredData.map((element, index) => {
     return (
       //WEATHER COLUMN
       <div key={index + "card"} className="fs-6 col text-center m-3 p-0">
@@ -269,7 +268,7 @@ export function createWeather(structuredData) {
         {element.forecast.map((element, index) => {
           let tab;
 
-          let tab1 = (
+          const tab1 = (
             //WEATHER DATA CELL
             <div
               key={index + "temp"}
@@ -292,7 +291,7 @@ export function createWeather(structuredData) {
               />
             </div>
           );
-          let tab2 = (
+          const tab2 = (
             //WEATHER DATA CELL IF TIME HAS ALREADY PASSED
             <div
               key={index + "temp"}
@@ -329,22 +328,22 @@ export function structureData(data, gmt) {
   //let year = data.init.slice(0, 4);
   const month = data.init.slice(4, 6);
   let day = data.init.slice(6, 8);
-  let time = data.init.slice(8);
-  time = convertTime(time, gmt);
+  const time = data.init.slice(8);
+  const convertedTime = convertTime(time, gmt);
   //assign proper timeslots
-  let forecasts = correctArrayTimeslots(data.dataseries, time);
+  const forecasts = correctArrayTimeslots(data.dataseries, convertedTime);
   //pad initial data if according to initial timeslot
-  forecasts = padArray(forecasts, time);
+  const paddedForecasts = padArray(forecasts, convertedTime);
 
   //split array from weather data into 8 chunks (days)
-  forecasts = arrayOfArrays(forecasts, 8);
+  const finalForecasts = arrayOfArrays(paddedForecasts, 8);
   //for eacht day, create an object in structuredData,
   //containint date and forecast
   for (let i = 0; i < 7; i++) {
     //modify to account for month end-*-----------------------------------------------FUNCTION NEEDED----
     structuredData.push({
       date: `${day}.${month}`, //.${year}`,
-      forecast: forecasts[i],
+      forecast: finalForecasts[i],
     });
     day = Number(day) + 1;
   }
