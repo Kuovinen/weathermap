@@ -13,7 +13,8 @@ export default function Main() {
     weather: [],
   });
   const [coordinates, setCoordinates] = useState({ lat: 60.169, lng: 24.938 });
-
+  //The following function is used to update page texts when coordinate data
+  //is change using the map
   async function updatePage(data) {
     const information = {
       location: null,
