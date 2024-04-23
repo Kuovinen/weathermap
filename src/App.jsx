@@ -26,7 +26,7 @@ function App() {
       const data = await responce.json();
       //Ask Geonames where current Coordinates are located administrativly
       const location = await getAdminLocation(coordinates.lat, coordinates.lng);
-
+      //data split into usable chunks instead of plain text:
       const structuredData = handleData(
         data.hourly.temperature_2m,
         data.hourly.time,
