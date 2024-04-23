@@ -26,6 +26,7 @@ export default function Map(props) {
             lat: Number(event.latLng.lat().toFixed(3)),
             lng: Number(event.latLng.lng().toFixed(3)),
           });
+          console.log(event.latLng.lat());
         }}
         center={props.coordinates}
         options={options}

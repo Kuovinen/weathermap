@@ -84,8 +84,8 @@ export default function Main() {
           {" | "}
           {data.location.country}-{data.location.adminArea}
         </div>
-        <div className="row-auto p-4" title="weatherContainer">
-          <div className="row justify-content-center r-6">{data.weather}</div>
+        <div className="column-auto p-4" title="weatherContainer">
+          <div className="row  ">{data.weather}</div>
         </div>
       </section>
     </main>
