@@ -1,4 +1,4 @@
-export default [
+const style = [
   {
     featureType: "landscape",
     stylers: [
@@ -57,3 +57,4 @@ export default [
     ],
   },
 ];
+export default style;
